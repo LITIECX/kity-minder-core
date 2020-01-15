@@ -192,9 +192,8 @@ define(function(require, exports, module) {
         importNode: function(node, json) {
             var data = json.data;
             node.data = {};
-
             for (var field in data) {
-                node.setData(field, data[field]);
+                 node.setData(field, data[field]);//设置每个节点的属性参数
             }
 
             var childrenTreeData = json.children || [];
@@ -229,12 +228,12 @@ define(function(require, exports, module) {
                 this.removeNode(this._root.getChildren()[0]);
             }
 
-            json = compatibility(json);
+            json = compatibility(json); //版本转化
 
             this.importNode(this._root, json.root);
 
-            this.setTemplate(json.template || 'default');
-            this.setTheme(json.theme || null);
+            this.setTemplate('fish-bone' || 'default');//该变布局方式
+            this.setTheme(json.theme || null);  //改变主题
             this.refresh();
 
             /**
@@ -301,9 +300,8 @@ define(function(require, exports, module) {
             var minder = this;
 
             // 指定了协议进行导入，需要检测协议是否支持
-            if (protocolName) {
+            if (protocolName) {//protocolName =json
                 protocol = protocols[protocolName];
-
                 if (!protocol || !protocol.decode) {
                     return Promise.reject(new Error('Not supported protocol:' + protocolName));
                 }
@@ -317,7 +315,6 @@ define(function(require, exports, module) {
 
             // 导入前抛事件
             this._fire(new MinderEvent('beforeimport', params));
-
             return Promise.resolve(protocol.decode(data, this, option)).then(function(json) {
                 minder.importJson(json);
                 return json;
@@ -356,7 +353,7 @@ define(function(require, exports, module) {
             // 导入前抛事件
             this._fire(new MinderEvent('beforeimport', params));
 
-            return Promise.resolve(protocol.decode(data, this, option))
+            return Promise.resolve(protocol.decode(data, this, option));
         }
     });
 });

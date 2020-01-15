@@ -118,7 +118,7 @@ define(function(require, exports, module) {
         execCommand: function(name) {
             if (!name) return null;
 
-            name = name.toLowerCase();
+            name = name.toLowerCase();  //字符串转小写lt
 
             var cmdArgs = [].slice.call(arguments, 1),
                 cmd, stoped, result, eventParams;

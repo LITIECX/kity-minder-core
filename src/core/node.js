@@ -134,7 +134,7 @@ define(function(require, exports, module) {
         setData: function(key, value) {
             if (typeof key == 'object') {
                 var data = key;
-                for (key in data) if (data.hasOwnProperty(key)) {
+                for (key in data) if (data.hasOwnProperty(key)) {//判断对象是否包含特定的自身（非继承）属性
                     this.data[key] = data[key];
                 }
             }
